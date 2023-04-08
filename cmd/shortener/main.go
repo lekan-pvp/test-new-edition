@@ -3,6 +3,8 @@ package main
 import (
 	_ "embed"
 	"fmt"
+	"log"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/lekan-pvp/short/internal/config"
@@ -11,7 +13,6 @@ import (
 	"github.com/lekan-pvp/short/internal/pprofservice"
 	"github.com/lekan-pvp/short/internal/server"
 	"github.com/lekan-pvp/short/internal/storage"
-	"log"
 )
 
 var (
@@ -38,6 +39,7 @@ func main() {
 	router := chi.NewRouter()
 
 	router.Use(middleware.Logger)
+	router.Use(mware.WithLogging)
 
 	repo := storage.NewConnector(config.Cfg)
 
